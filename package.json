@@ -22,11 +22,18 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mr-cap/Contact-Management.git"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "bugs": {
+    "url": "https://github.com/mr-cap/Contact-Management/issues"
   },
   "browserslist": {
     "production": [
