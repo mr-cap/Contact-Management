@@ -8,6 +8,12 @@ In the project directory, you can run:
 
 ### `npm start`
 
+Render Sever to fetch data from json-server
+
+step1: cd server
+step2: npm start
+
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
