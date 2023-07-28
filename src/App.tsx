@@ -83,6 +83,12 @@ const AppLayout = () => {
                 <NoDataFound />
               </div>
             )}
+            {pathname === "" && getContactList.length === 0 && (
+              <div className="mx-5 mt-10 shadow-2xl">
+                {" "}
+                <NoDataFound />
+              </div>
+            )}
           </div>
         </div>
       </div>
