@@ -13,8 +13,11 @@ import {
   useLocation,
 } from "react-router-dom";
 import ErrorCard from "./Components/ErrorCard";
+import { useAppSelector } from "./redux-store/hooks";
+import NoDataFound from "./Components/NoDataFound";
 
 const AppLayout = () => {
+  const getContactList = useAppSelector((state) => state.contact.items);
   const { pathname } = useLocation();
   return (
     <div className="App ">
@@ -60,6 +63,13 @@ const AppLayout = () => {
               </div>
               <Outlet />
             </div>
+
+            {getContactList.length === 0 && (
+              <div className="mx-5 mt-10 shadow-2xl">
+                {" "}
+                <NoDataFound />
+              </div>
+            )}
           </div>
         </div>
       </div>
