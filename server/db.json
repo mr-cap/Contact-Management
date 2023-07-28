@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "first_name": "Arvind",
+      "last_name": "K",
+      "status": "active",
+      "id": "0d0d6908-0e2a-4c72-917f-b22cf3628085"
+    },
+    {
+      "id": "c0256f9f-2103-4b34-95c9-f043a65e8fbd",
+      "first_name": "Prabhakaran",
+      "last_name": "V",
+      "status": "inactive"
+    }
+  ]
+}
