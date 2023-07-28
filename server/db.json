@@ -1,3 +1,10 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "first_name": "Arvind",
+      "last_name": "K",
+      "status": "active",
+      "id": "f914fee9-6f0f-4ada-aa95-614d6db72034"
+    }
+  ]
 }

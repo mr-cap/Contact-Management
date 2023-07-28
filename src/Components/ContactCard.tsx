@@ -15,18 +15,23 @@ const ContactCard = () => {
     const serverUrl = "http://localhost:9000";
     const fetchData = async () => {
       const dataUrl = `${serverUrl}/contacts`;
-      const result = await axios
-        .get(dataUrl)
-        .then((response) => response?.data);
-      dispatch(getContact(result));
+      try {
+        const result = await axios
+          .get(dataUrl)
+          .then((response) => response?.data)
+          .catch((err) => console.log(err));
+        dispatch(getContact(result));
+      } catch (err) {
+        console.log(err);
+      }
     };
-    getContactList.length === 0 && fetchData();
+    getContactList?.length === 0 && fetchData();
   });
   return (
     <>
       <div className="mx-auto container py-14 sm:py-22">
         <ul className="grid gap-x-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-16">
-          {getContactList.length !== 0 &&
+          {getContactList?.length !== 0 &&
             getContactList?.map((contact: any) => (
               <li
                 key={contact?.id}

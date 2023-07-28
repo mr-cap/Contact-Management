@@ -24,11 +24,10 @@ const DropDown = ({ dropId }: { dropId: any }) => {
     try {
       const serverUrl = "http://localhost:9000";
       await axios.delete(`${serverUrl}/contacts/${dropId}`);
-      dispatch(deleteContact({ id: dropId }));
-      //   console.log(response);
     } catch (error) {
       console.log(error);
     }
+    dispatch(deleteContact({ id: dropId }));
   };
   return (
     <div>

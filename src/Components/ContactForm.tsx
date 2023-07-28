@@ -2,11 +2,12 @@ import { UserIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { useAppDispatch } from "../redux-store/hooks";
+import { useAppDispatch, useAppSelector } from "../redux-store/hooks";
 import { getContact, updateContact } from "../redux-store/listContact";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffectOnce } from "../utils/useEfftect";
 const ContactForm = ({ pathType }: { pathType: string }) => {
+  const getContactList = useAppSelector((state) => state.contact.items);
   const dispatch = useAppDispatch();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
@@ -23,28 +24,32 @@ const ContactForm = ({ pathType }: { pathType: string }) => {
       last_name: lastName,
       status: status,
     };
-
-    let response = await axios.post(dataUrl, payload);
-    if (response) {
-      navigate("/contacts");
-      dispatch(getContact([response?.data]));
-      restField();
+    try {
+      await axios.post(dataUrl, payload);
+    } catch (err) {
+      console.log(err);
     }
+    navigate("/contacts");
+    dispatch(getContact([payload]));
+    restField();
   };
   const putContact = async () => {
-    let dataUrl = `${serverUrl}/contacts/${userId}`;
     const payload = {
+      id: userId,
       first_name: firstName,
       last_name: lastName,
       status: status,
     };
-
-    let response = await axios.put(dataUrl, payload);
-    if (response) {
-      navigate("/contacts");
-      dispatch(updateContact(response.data));
-      restField();
+    try {
+      let dataUrl = `${serverUrl}/contacts/${userId}`;
+      await axios.put(dataUrl, payload);
+    } catch (err) {
+      console.log(err);
     }
+
+    navigate("/contacts");
+    dispatch(updateContact(payload));
+    restField();
   };
   const restField = () => {
     setFirstName("");
@@ -59,10 +64,20 @@ const ContactForm = ({ pathType }: { pathType: string }) => {
   useEffect(() => {
     const fetchData = async () => {
       const dataUrl = `${serverUrl}/contacts/${userId}`;
-      const result = await axios(dataUrl).then((response) => response?.data);
-      setFirstName(result?.first_name);
-      setLastName(result?.last_name);
-      setStatus(result?.status);
+      try {
+        const result = await axios(dataUrl).then((response) => response?.data);
+        setFirstName(result?.first_name);
+        setLastName(result?.last_name);
+        setStatus(result?.status);
+      } catch (err) {
+        console.log(err);
+        let result = getContactList?.filter(
+          (contact: any) => contact.id === userId
+        );
+        setFirstName(result?.[0]?.first_name);
+        setLastName(result?.[0]?.last_name);
+        setStatus(result?.[0]?.status);
+      }
     };
     userId && fetchData();
     !userId && restField();
