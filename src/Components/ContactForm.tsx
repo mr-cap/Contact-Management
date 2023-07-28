@@ -25,11 +25,11 @@ const ContactForm = ({ pathType }: { pathType: string }) => {
     };
 
     let response = await axios.post(dataUrl, payload);
-    if (response) {
+    
       navigate("/contacts");
-      dispatch(getContact([response?.data]));
+      dispatch(getContact([payload]));
       restField();
-    }
+    
   };
   const putContact = async () => {
     let dataUrl = `${serverUrl}/contacts/${userId}`;
@@ -40,11 +40,11 @@ const ContactForm = ({ pathType }: { pathType: string }) => {
     };
 
     let response = await axios.put(dataUrl, payload);
-    if (response) {
+    
       navigate("/contacts");
-      dispatch(updateContact(response.data));
+      dispatch(updateContact(payload));
       restField();
-    }
+    
   };
   const restField = () => {
     setFirstName("");
