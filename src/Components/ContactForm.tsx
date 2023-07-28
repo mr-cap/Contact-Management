@@ -24,7 +24,7 @@ const ContactForm = ({ pathType }: { pathType: string }) => {
       status: status,
     };
 
-    let response = await axios.post(dataUrl, payload);
+    await axios.post(dataUrl, payload);
     
       navigate("/contacts");
       dispatch(getContact([payload]));
@@ -39,7 +39,7 @@ const ContactForm = ({ pathType }: { pathType: string }) => {
       status: status,
     };
 
-    let response = await axios.put(dataUrl, payload);
+    await axios.put(dataUrl, payload);
     
       navigate("/contacts");
       dispatch(updateContact(payload));
