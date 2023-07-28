@@ -10,8 +10,8 @@ In the project directory, you can run:
 
 Render Sever to fetch data from json-server
 
-step1: cd server
-step2: npm start
+###step1: `cd server`
+###step2: `npm start`
 
 
 Runs the app in the development mode.\
